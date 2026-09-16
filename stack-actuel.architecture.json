@@ -60,7 +60,7 @@
           "claude",
           "brain-vault",
           "obsidian",
-          "brain-repo"
+          "github"
         ],
         "note": "Le vault vit en local sur chaque PC ; GitHub ne sert que de point de synchro."
       }
@@ -86,7 +86,7 @@
       "id": "github",
       "type": "cloud",
       "label": "GitHub",
-      "sublabel": "4 repos projets web",
+      "sublabel": "5 repos",
       "pos": [
         300,
         200
@@ -95,7 +95,7 @@
         190,
         64
       ],
-      "tag": "deploy on push",
+      "tag": "code + backup",
       "brand": "github"
     },
     {
@@ -283,29 +283,17 @@
         64
       ],
       "tag": "sur chaque PC"
-    },
-    {
-      "id": "brain-repo",
-      "type": "cloud",
-      "label": "GitHub — second-brain",
-      "sublabel": "repo de backup",
-      "pos": [
-        880,
-        700
-      ],
-      "size": [
-        200,
-        64
-      ],
-      "tag": "point de synchro",
-      "brand": "github"
     }
   ],
   "connections": [
     {
       "id": "claude-to-gh",
       "from": "claude",
-      "to": "github"
+      "to": "github",
+      "label": "push : code + notes",
+      "variant": "emphasis",
+      "labelDx": -65,
+      "labelDy": 20
     },
     {
       "id": "claude-to-cf",
@@ -426,23 +414,13 @@
       "toSide": "right"
     },
     {
-      "id": "vault-push",
-      "from": "brain-vault",
-      "to": "brain-repo",
-      "label": "push a chaque changement",
-      "variant": "emphasis",
-      "fromSide": "right",
-      "toSide": "left",
-      "labelDy": 24
-    },
-    {
-      "id": "repo-pull",
-      "from": "brain-repo",
-      "to": "brain-vault",
+      "id": "gh-to-claude",
+      "from": "github",
+      "to": "claude",
       "label": "pull a l'ouverture",
       "variant": "emphasis",
-      "fromSide": "left",
-      "toSide": "right"
+      "labelDx": 90,
+      "labelDy": 20
     }
   ],
   "cards": [
@@ -477,7 +455,7 @@
       "dot": "violet",
       "title": "Outillage",
       "items": [
-        "GitHub est en amont : tout le code des deux plateformes part de la",
+        "GitHub est en amont : code des projets web + backup du second brain",
         "Claude Code pilote GitHub, Cloudflare, Vercel et Supabase via MCP"
       ]
     },
@@ -495,8 +473,8 @@
       "title": "Second brain",
       "items": [
         "Claude Code ecrit les notes .md en local, Obsidian sert a les lire et editer",
-        "Push vers GitHub a chaque changement, pull a l'ouverture sur un autre PC",
-        "GitHub n'est qu'un point de synchro : jamais d'edition directe dessus"
+        "Le vault part sur le meme GitHub : push a chaque changement, pull a l'ouverture sur un autre PC",
+        "Jamais d'edition directe sur GitHub, tout le travail se fait en local"
       ]
     }
   ]
