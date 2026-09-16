@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Stack actuel — projets web de Jeremy",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1360,
+      780
+    ],
+    "views": [
+      {
+        "id": "site-photo",
+        "label": "Site photo",
+        "focus": [
+          "github",
+          "cloudflare",
+          "cf-pages",
+          "cf-r2"
+        ],
+        "note": "Un seul site, deux domaines : jeremycabaret.com redirige vers jeremy-sportfoto.at."
+      },
+      {
+        "id": "etageres",
+        "label": "visualshelf x2",
+        "focus": [
+          "vercel",
+          "shelf-books",
+          "shelf-films",
+          "tmdb"
+        ],
+        "note": "Deux sites jumeaux ; seul celui de Florian consomme une API externe."
+      },
+      {
+        "id": "motogp",
+        "label": "MotoGP Predictions",
+        "focus": [
+          "g7-app",
+          "motogp-src",
+          "supabase"
+        ],
+        "note": "Le seul projet avec un etat persistant et un flux qui circule dans les deux sens."
+      },
+      {
+        "id": "outillage",
+        "label": "Outillage",
+        "focus": [
+          "claude",
+          "github",
+          "cloudflare",
+          "vercel",
+          "supabase"
+        ],
+        "note": "Claude Code pilote les quatre plateformes via MCP, sur tous les projets."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "claude",
+      "type": "external",
+      "label": "Claude Code",
+      "sublabel": "agent de dev (MCP)",
+      "pos": [
+        40,
+        330
+      ],
+      "size": [
+        200,
+        80
+      ],
+      "brand": "anthropic"
+    },
+    {
+      "id": "github",
+      "type": "cloud",
+      "label": "GitHub",
+      "sublabel": "4 repos",
+      "pos": [
+        300,
+        200
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "deploy on push",
+      "brand": "github"
+    },
+    {
+      "id": "cloudflare",
+      "type": "cloud",
+      "label": "Cloudflare",
+      "sublabel": "DNS + TLS",
+      "pos": [
+        560,
+        40
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "2 domaines",
+      "brand": "cloudflare"
+    },
+    {
+      "id": "vercel",
+      "type": "cloud",
+      "label": "Vercel",
+      "sublabel": "hebergement",
+      "pos": [
+        560,
+        330
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "tier gratuit",
+      "brand": "vercel"
+    },
+    {
+      "id": "supabase",
+      "type": "database",
+      "label": "Supabase",
+      "sublabel": "Postgres",
+      "pos": [
+        560,
+        620
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "tier gratuit",
+      "brand": "supabase"
+    },
+    {
+      "id": "cf-pages",
+      "type": "frontend",
+      "label": "Jeremy SportFoto",
+      "sublabel": "site photo — Pages",
+      "pos": [
+        820,
+        40
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "prestations",
+      "brand": "cloudflare"
+    },
+    {
+      "id": "shelf-books",
+      "type": "frontend",
+      "label": "visualshelf",
+      "sublabel": "mes livres + BD",
+      "pos": [
+        820,
+        170
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "source inconnue"
+    },
+    {
+      "id": "shelf-films",
+      "type": "frontend",
+      "label": "visualshelf-florian",
+      "sublabel": "films de Florian",
+      "pos": [
+        820,
+        300
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "quota images"
+    },
+    {
+      "id": "g7-app",
+      "type": "frontend",
+      "label": "MotoGP Predictions",
+      "sublabel": "pronostics",
+      "pos": [
+        820,
+        460
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "entre amis",
+      "brand": "next-js"
+    },
+    {
+      "id": "cf-r2",
+      "type": "cloud",
+      "label": "Cloudflare R2",
+      "sublabel": "photos du site",
+      "pos": [
+        1080,
+        40
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "source",
+      "brand": "cloudflare"
+    },
+    {
+      "id": "tmdb",
+      "type": "external",
+      "label": "TMDB",
+      "sublabel": "The Movie Database",
+      "pos": [
+        1080,
+        300
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "source de Florian"
+    },
+    {
+      "id": "motogp-src",
+      "type": "external",
+      "label": "Source MotoGP",
+      "sublabel": "calendrier + pilotes",
+      "pos": [
+        1080,
+        460
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "a confirmer"
+    }
+  ],
+  "connections": [
+    {
+      "id": "claude-to-gh",
+      "from": "claude",
+      "to": "github"
+    },
+    {
+      "id": "claude-to-cf",
+      "from": "claude",
+      "to": "cloudflare",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "via": [
+        [
+          140,
+          150
+        ],
+        [
+          655,
+          150
+        ]
+      ]
+    },
+    {
+      "id": "claude-to-vercel",
+      "from": "claude",
+      "to": "vercel",
+      "variant": "dashed"
+    },
+    {
+      "id": "claude-to-db",
+      "from": "claude",
+      "to": "supabase",
+      "variant": "dashed"
+    },
+    {
+      "id": "gh-to-cf",
+      "from": "github",
+      "to": "cloudflare",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "gh-to-vercel",
+      "from": "github",
+      "to": "vercel"
+    },
+    {
+      "id": "cf-to-pages",
+      "from": "cloudflare",
+      "to": "cf-pages"
+    },
+    {
+      "id": "r2-to-pages",
+      "from": "cf-r2",
+      "to": "cf-pages",
+      "label": "photos",
+      "labelDy": -26
+    },
+    {
+      "id": "vercel-to-books",
+      "from": "vercel",
+      "to": "shelf-books"
+    },
+    {
+      "id": "vercel-to-films",
+      "from": "vercel",
+      "to": "shelf-films"
+    },
+    {
+      "id": "vercel-to-g7",
+      "from": "vercel",
+      "to": "g7-app"
+    },
+    {
+      "id": "tmdb-to-films",
+      "from": "tmdb",
+      "to": "shelf-films",
+      "label": "metadonnees + affiches",
+      "labelDy": -26
+    },
+    {
+      "id": "src-to-g7",
+      "from": "motogp-src",
+      "to": "g7-app",
+      "label": "calendrier + pilotes",
+      "labelDy": -26
+    },
+    {
+      "id": "g7-to-db",
+      "from": "g7-app",
+      "to": "supabase",
+      "label": "pronostics ecrits",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "right"
+    },
+    {
+      "id": "db-to-g7",
+      "from": "supabase",
+      "to": "g7-app",
+      "label": "classement calcule",
+      "variant": "emphasis",
+      "fromSide": "top",
+      "toSide": "top",
+      "labelDx": 120
+    }
+  ],
+  "cards": [
+    {
+      "dot": "orange",
+      "title": "Cloudflare",
+      "items": [
+        "Un seul site : jeremycabaret.com redirige vers jeremy-sportfoto.at",
+        "Site vitrine pour vendre les prestations photo",
+        "Les photos viennent de R2, egress gratuit"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Vercel — tier gratuit",
+      "items": [
+        "3 projets, tous sur sous-domaines vercel.app",
+        "visualshelf-florian tire ses donnees de TMDB ; source de visualshelf non identifiee",
+        "Quota d'optimisation d'images atteint cote Florian"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Donnees",
+      "items": [
+        "Supabase Postgres, seul etat persistant du parc",
+        "Les joueurs ecrivent leurs pronostics, Supabase calcule le classement, le site le reaffiche",
+        "Tout le reste est reconstructible depuis GitHub"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Outillage",
+      "items": [
+        "GitHub est en amont : tout le code des deux plateformes part de la",
+        "Claude Code pilote GitHub, Cloudflare, Vercel et Supabase via MCP"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Ce qui n'existe pas encore",
+      "items": [
+        "Aucun VPS",
+        "Aucun serveur a la maison",
+        "Aucun service auto-heberge"
+      ]
+    }
+  ]
+}
