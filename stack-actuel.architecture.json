@@ -2,11 +2,11 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "Stack actuel — projets web de Jeremy",
+    "title": "Stack actuel — projets web + second brain",
     "quality_profile": "showcase",
     "viewBox": [
       1360,
-      780
+      800
     ],
     "views": [
       {
@@ -52,6 +52,17 @@
           "supabase"
         ],
         "note": "Claude Code pilote les quatre plateformes via MCP, sur tous les projets."
+      },
+      {
+        "id": "second-brain",
+        "label": "Second brain",
+        "focus": [
+          "claude",
+          "brain-vault",
+          "obsidian",
+          "brain-repo"
+        ],
+        "note": "Le vault vit en local sur chaque PC ; GitHub ne sert que de point de synchro."
       }
     ]
   },
@@ -75,7 +86,7 @@
       "id": "github",
       "type": "cloud",
       "label": "GitHub",
-      "sublabel": "4 repos",
+      "sublabel": "4 repos projets web",
       "pos": [
         300,
         200
@@ -242,6 +253,52 @@
         64
       ],
       "tag": "a confirmer"
+    },
+    {
+      "id": "obsidian",
+      "type": "frontend",
+      "label": "Obsidian",
+      "sublabel": "lecture + edition",
+      "pos": [
+        40,
+        700
+      ],
+      "size": [
+        200,
+        64
+      ],
+      "tag": "confort de lecture"
+    },
+    {
+      "id": "brain-vault",
+      "type": "database",
+      "label": "Vault local",
+      "sublabel": "notes .md",
+      "pos": [
+        340,
+        700
+      ],
+      "size": [
+        200,
+        64
+      ],
+      "tag": "sur chaque PC"
+    },
+    {
+      "id": "brain-repo",
+      "type": "cloud",
+      "label": "GitHub — second-brain",
+      "sublabel": "repo de backup",
+      "pos": [
+        880,
+        700
+      ],
+      "size": [
+        200,
+        64
+      ],
+      "tag": "point de synchro",
+      "brand": "github"
     }
   ],
   "connections": [
@@ -351,6 +408,41 @@
       "fromSide": "top",
       "toSide": "top",
       "labelDx": 120
+    },
+    {
+      "id": "claude-to-vault",
+      "from": "claude",
+      "to": "brain-vault",
+      "label": "ecrit les notes .md",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "vault-to-obsidian",
+      "from": "brain-vault",
+      "to": "obsidian",
+      "label": "affichage",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "vault-push",
+      "from": "brain-vault",
+      "to": "brain-repo",
+      "label": "push a chaque changement",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left",
+      "labelDy": 24
+    },
+    {
+      "id": "repo-pull",
+      "from": "brain-repo",
+      "to": "brain-vault",
+      "label": "pull a l'ouverture",
+      "variant": "emphasis",
+      "fromSide": "left",
+      "toSide": "right"
     }
   ],
   "cards": [
@@ -376,7 +468,7 @@
       "dot": "emerald",
       "title": "Donnees",
       "items": [
-        "Supabase Postgres, seul etat persistant du parc",
+        "Supabase Postgres, seul etat persistant des projets web",
         "Les joueurs ecrivent leurs pronostics, Supabase calcule le classement, le site le reaffiche",
         "Tout le reste est reconstructible depuis GitHub"
       ]
@@ -396,6 +488,15 @@
         "Aucun VPS",
         "Aucun serveur a la maison",
         "Aucun service auto-heberge"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Second brain",
+      "items": [
+        "Claude Code ecrit les notes .md en local, Obsidian sert a les lire et editer",
+        "Push vers GitHub a chaque changement, pull a l'ouverture sur un autre PC",
+        "GitHub n'est qu'un point de synchro : jamais d'edition directe dessus"
       ]
     }
   ]
