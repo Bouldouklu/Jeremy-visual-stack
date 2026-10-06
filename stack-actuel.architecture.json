@@ -2,11 +2,11 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "Stack actuel — projets web + second brain",
+    "title": "Stack actuel — web, jeux + second brain",
     "quality_profile": "showcase",
     "viewBox": [
       1360,
-      800
+      860
     ],
     "views": [
       {
@@ -42,16 +42,15 @@
         "note": "Le seul projet avec un etat persistant et un flux qui circule dans les deux sens."
       },
       {
-        "id": "outillage",
-        "label": "Outillage",
+        "id": "jeux",
+        "label": "Jeux itch.io",
         "focus": [
           "claude",
           "github",
-          "cloudflare",
-          "vercel",
-          "supabase"
+          "itch",
+          "itch-games"
         ],
-        "note": "Claude Code pilote les quatre plateformes via MCP, sur tous les projets."
+        "note": "Chaque iteration : Claude Code (cloud ou local) produit le build, butler le pousse sur itch.io."
       },
       {
         "id": "second-brain",
@@ -86,7 +85,7 @@
       "id": "github",
       "type": "cloud",
       "label": "GitHub",
-      "sublabel": "5 repos",
+      "sublabel": "web + jeux + notes",
       "pos": [
         300,
         200
@@ -261,7 +260,7 @@
       "sublabel": "lecture + edition",
       "pos": [
         40,
-        700
+        720
       ],
       "size": [
         200,
@@ -275,14 +274,44 @@
       "label": "Vault local",
       "sublabel": "notes .md",
       "pos": [
-        340,
-        700
+        40,
+        560
       ],
       "size": [
         200,
         64
       ],
       "tag": "sur chaque PC"
+    },
+    {
+      "id": "itch",
+      "type": "cloud",
+      "label": "itch.io",
+      "sublabel": "hebergement jeux",
+      "pos": [
+        560,
+        760
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "via butler"
+    },
+    {
+      "id": "itch-games",
+      "type": "frontend",
+      "label": "Mes jeux",
+      "sublabel": "bouldouklu.itch.io",
+      "pos": [
+        820,
+        760
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "page publique"
     }
   ],
   "connections": [
@@ -403,15 +432,23 @@
       "to": "brain-vault",
       "label": "ecrit les notes .md",
       "fromSide": "bottom",
-      "toSide": "top"
+      "toSide": "top",
+      "labelAt": [
+        205,
+        485
+      ]
     },
     {
       "id": "vault-to-obsidian",
       "from": "brain-vault",
       "to": "obsidian",
       "label": "affichage",
-      "fromSide": "left",
-      "toSide": "right"
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        180,
+        672
+      ]
     },
     {
       "id": "gh-to-claude",
@@ -421,6 +458,34 @@
       "variant": "emphasis",
       "labelDx": 90,
       "labelDy": 20
+    },
+    {
+      "id": "claude-to-itch",
+      "from": "claude",
+      "to": "itch",
+      "label": "butler push : build",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left",
+      "labelAt": [
+        430,
+        778
+      ],
+      "via": [
+        [
+          280,
+          370
+        ],
+        [
+          280,
+          792
+        ]
+      ]
+    },
+    {
+      "id": "itch-to-games",
+      "from": "itch",
+      "to": "itch-games"
     }
   ],
   "cards": [
@@ -455,17 +520,9 @@
       "dot": "violet",
       "title": "Outillage",
       "items": [
-        "GitHub est en amont : code des projets web + backup du second brain",
-        "Claude Code pilote GitHub, Cloudflare, Vercel et Supabase via MCP"
-      ]
-    },
-    {
-      "dot": "slate",
-      "title": "Ce qui n'existe pas encore",
-      "items": [
-        "Aucun VPS",
-        "Aucun serveur a la maison",
-        "Aucun service auto-heberge"
+        "GitHub est en amont : code des projets web, des jeux + backup du second brain",
+        "Claude Code pilote GitHub, Cloudflare, Vercel et Supabase via MCP",
+        "Aucun VPS, serveur a la maison ni service auto-heberge"
       ]
     },
     {
@@ -475,6 +532,15 @@
         "Claude Code ecrit les notes .md en local, Obsidian sert a les lire et editer",
         "Le vault part sur le meme GitHub : push a chaque changement, pull a l'ouverture sur un autre PC",
         "Jamais d'edition directe sur GitHub, tout le travail se fait en local"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Jeux video",
+      "items": [
+        "Code des jeux sur GitHub, comme les projets web",
+        "Chaque iteration : Claude Code (cloud ou local) produit le build, butler le pousse sur itch.io",
+        "Page itch : bouldouklu.itch.io"
       ]
     }
   ]
